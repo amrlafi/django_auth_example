@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'oauth2_provider',
     'corsheaders',
+    'channels',
+    'chat'
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -81,7 +83,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'django_test.wsgi.application'
-
+ASGI_APPLICATION = 'django_test.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
